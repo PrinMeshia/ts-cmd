@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+
+    db:
+        image: mysql
+        container_name: mysql
+        restart: always
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_DATABASE: medevia_cms
+        ports:
+            - 3306:3306
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: medevia_next_phpmyadmin
+        restart: always
+        depends_on:
+            - db
+        ports:
+            - 8081:80
+        environment:
+            PMA_HOST: db
+
